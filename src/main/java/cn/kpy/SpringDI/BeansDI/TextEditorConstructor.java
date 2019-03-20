@@ -12,7 +12,7 @@ public class TextEditorConstructor {
     private SpellChecker spellChecker;
 
     public TextEditorConstructor(SpellChecker spellChecker) {
-        System.out.println("Inside TextEditorConstructor constructor");
+        System.out.println("Inside TextEditorProperty constructor");
         this.spellChecker = spellChecker;
     }
 

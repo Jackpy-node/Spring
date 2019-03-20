@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--进行@AutowiredSetter、@Resource、@Value等注解驱动注册，使注解生效-->
+    <context:annotation-config></context:annotation-config>
+
+    <!--@Required注解，现在已经不再使用-->
+    <bean id="student" class="cn.kpy.SpringAnnotation.Required.Student">
+        <property name="name" value="John"/>
+        <property name="age" value="20"/>
+     </bean>
+
+    <bean id="spellChecker" class="cn.kpy.SpringAnnotation.Autowired.SpellChecker"></bean>
+
+    <!--注解自动装配方式一：Setter()方法中使用 @Autowired注解方式自动装配-->
+    <bean id="textEditor" class="cn.kpy.SpringAnnotation.Autowired.TextEditorSetValue"></bean>
+
+    <!--注解自动装配方式一：属性值中的@Autowired，为自动连接属性传递的时候，Spring 会将这些传递过来的值或者引用自动分配给那些属性-->
+    <bean id="textEditor1" class="cn.kpy.SpringAnnotation.Autowired.TextEditorProperty"></bean>
+
+    <!--注解自动装配方式一：构造函数中的@Autowired，一个构造函数@Autowired说明当创建bean时，即使在XML文件中没有使用元素配置bean，构造函数也会被自动连接-->
+    <bean id="textEditor2" class="cn.kpy.SpringAnnotation.Autowired.TextEditorConstructor"></bean>
+
+</beans>
