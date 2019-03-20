@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Bean的作用域：
+        singleton：单例类型，就是在创建起容器时就同时自动创建了一个bean的对象，不管你是否使用，他都存在了，每次获取到的对象都是同一个对象。注意，Singleton作用域是Spring中的缺省作用域
+        prototype：每次从容器中调用Bean时，都返回一个新的实例，即每次调用getBean()时，相当于执行newXxxBean()，Prototype是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象
+        request：每次HTTP请求都会创建一个新的Bean，该作用域仅适用于WebApplicationContext环境
+        session：同一个HTTP Session共享一个Bean，不同Session使用不同的Bean，仅适用于WebApplicationContext环境
+        global-session：一般用于Portlet应用环境，该运用域仅适用于WebApplicationContext环境
+    -->
+
+    <!--定义Bean后置处理器BeanPostProcessor-->
+    <bean class="cn.kpy.SpringIoC.SpringStudent.BeanPostProcessor"></bean>
+
+    <bean id="student" class="cn.kpy.SpringIoC.SpringStudent.Student">
+        <!-- <property name="name" value="John"/>
+         <property name="age" value="20" />-->
+    </bean>
+
+    <bean id="student1" class="cn.kpy.SpringIoC.SpringStudent.Student" scope="prototype">
+        <!-- <property name="name" value="John"/>
+         <property name="age" value="20" />-->
+    </bean>
+
+    <bean id="student2" class="cn.kpy.SpringIoC.SpringStudent.Student" scope="prototype" init-method="init"
+          destroy-method="destroy">
+        <!--BeanPostProcessor类是为了让创建其他类的时候进行创建前后的一些操作，你这么写一般是不会调用postProcessBeforeInitialization()和postProcessAfterInitialization()方法的。
+            原因就是。在容器初始化定义的bean创建之前，容器会自己去查找所有的beanPostProcessor进行创建，你自定义的类，
+            由于是实现了BeanPostProcessor接口，因此这时候会进行BeanPostProcessor的创建和注册，源码中，在注册BeanPostProcessor会进行getBean操作，即创建自定义的bean。
+            由于默认的是单例模式，因此后面再次进行获取就不会再次调用postProcessBeforeInitialization()和postProcessAfterInitialization()方法，
+            因为已经放入了spring缓存，直接获取，不需要实例，因此没有调用。如果你真的想使用的时候调用postProcessBeforeInitialization()和postProcessAfterInitialization()方法，
+            将你的bean设置为原型模式（prototype），这样每次调用都会创建，因此初始化容器之后每次都会调用的-->
+        <property name="name" value="John"/>
+        <property name="age" value="20"/>
+    </bean>
+
+
+    <!--Spring允许继承bean的配置，被继承的bean称为父bean，继承这个父Bean的Bean称为子Bean，子Bean从父Bean中继承配置，包括Bean的属性配置，子Bean可以覆盖从父Bean继承过来的配置-->
+    <bean id="parentStudent" class="cn.kpy.SpringIoC.SpringStudent.Student">
+        <property name="name" value="John"/>
+        <property name="age" value="20"/>
+        <property name="sex" value="female"/>
+    </bean>
+    <!--通过Bean的Parent属性进行类的继承-->
+    <bean id="primaryStudent" class="cn.kpy.SpringIoC.SpringStudent.PrimaryStudent" parent="parentStudent">
+        <!--<property name="name" value="kkk"/>-->
+        <property name="age" value="100"/>
+    </bean>
+
+    <!--Bean定义模板：在定义一个 Bean 定义模板时，你不应该指定类的属性，而应该指定带 true 值的抽象属性-->
+    <bean id="beanTemplate" class="cn.kpy.SpringIoC.SpringStudent.Student" abstract="true">
+        <property name="name" value="Task"/>
+        <property name="age" value="20"/>
+        <property name="sex" value="male"/>
+    </bean>
+
+</beans>

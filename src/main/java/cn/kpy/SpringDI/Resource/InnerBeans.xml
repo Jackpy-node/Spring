@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Inner Bean：bean实现内部类-->
+    <bean id="computer" class="cn.kpy.SpringDI.InnerBeansDI.Computer">
+        <property name="mainBoard">
+            <bean id="innerBeans" class="cn.kpy.SpringDI.InnerBeansDI.MainBoard"></bean>
+        </property>
+    </bean>
+</beans>
