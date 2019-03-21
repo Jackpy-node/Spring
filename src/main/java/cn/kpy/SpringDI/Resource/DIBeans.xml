@@ -16,11 +16,11 @@
         <property name="spellChecker" ref="spellChecker"></property>
     </bean>
 
-    <!--依赖注入方式三：自动装配-byName-->
+    <!--依赖注入方式三：自动装配-byName，尝试将它的属性与配置文件中定义为相同名称的 beans 进行匹配和连接-->
     <bean id="textEditor2" class="cn.kpy.SpringDI.BeansDI.TextEditorSetValue" autowire="byName">
     </bean>
 
-    <!--依赖注入方式四：自动装配-byType-->
+    <!--依赖注入方式四：自动装配-byType，它的type恰好与配置文件中beans名称中的一个相匹配，将尝试匹配和连接它的属性-->
     <bean id="textEditor3" class="cn.kpy.SpringDI.BeansDI.TextEditorSetValue" autowire="byType">
     </bean>
 
