@@ -24,8 +24,7 @@
          <property name="age" value="20" />-->
     </bean>
 
-    <bean id="student2" class="cn.kpy.SpringIoC.SpringStudent.Student" scope="prototype" init-method="init"
-          destroy-method="destroy">
+    <bean id="student2" class="cn.kpy.SpringIoC.SpringStudent.Student" scope="prototype" init-method="init" destroy-method="destroy">
         <!--BeanPostProcessor类是为了让创建其他类的时候进行创建前后的一些操作，你这么写一般是不会调用postProcessBeforeInitialization()和postProcessAfterInitialization()方法的。
             原因就是。在容器初始化定义的bean创建之前，容器会自己去查找所有的beanPostProcessor进行创建，你自定义的类，
             由于是实现了BeanPostProcessor接口，因此这时候会进行BeanPostProcessor的创建和注册，源码中，在注册BeanPostProcessor会进行getBean操作，即创建自定义的bean。
