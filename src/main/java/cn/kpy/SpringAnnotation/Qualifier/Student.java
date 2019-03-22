@@ -1,4 +1,4 @@
-package cn.kpy.SpringAnnotation.Required;
+package cn.kpy.SpringAnnotation.Qualifier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,7 +17,6 @@ public class Student {
         return name;
     }
 
-    //@Required注解已经不再使用
     public void setName(String name) {
         this.name = name;
     }
@@ -26,8 +25,6 @@ public class Student {
         return age;
     }
 
-    //@Autowired 的（required=false）选项，默认情况下，@Autowired注释意味着依赖是必须的，它类似于@Required注释
-    @Autowired
     public void setAge(int age) {
         this.age = age;
     }

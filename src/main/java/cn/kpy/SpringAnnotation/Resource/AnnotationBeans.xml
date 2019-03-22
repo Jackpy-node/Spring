@@ -25,4 +25,20 @@
     <!--注解自动装配方式一：构造函数中的@Autowired，一个构造函数@Autowired说明当创建bean时，即使在XML文件中没有使用元素配置bean，构造函数也会被自动连接-->
     <bean id="textEditor2" class="cn.kpy.SpringAnnotation.Autowired.TextEditorConstructor"></bean>
 
+
+    <!--Definition for profile bean-->
+    <bean id="profile" class="cn.kpy.SpringAnnotation.Qualifier.Profile"></bean>
+
+    <!--Definition for student1 bean-->
+    <bean id="student1" class="cn.kpy.SpringAnnotation.Qualifier.Student">
+        <property name="name" value="James"/>
+        <property name="age" value="19"/>
+    </bean>
+
+    <!--Definition for student2 bean-->
+    <bean id="student2" class="cn.kpy.SpringAnnotation.Qualifier.Student">
+        <property name="name" value="Tony"/>
+        <property name="age" value="20"/>
+    </bean>
+
 </beans>
