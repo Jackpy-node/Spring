@@ -12,4 +12,4 @@
 ### 5. RequestHandledEvent
   这是一个 web-specific 事件，告诉所有 bean HTTP 请求已经被服务。
 ## 二、Spring事件实现方式：
-实现ApplicationListener<ContextEvent>接口
+实现ApplicationListener < ContextEvent > 接口
