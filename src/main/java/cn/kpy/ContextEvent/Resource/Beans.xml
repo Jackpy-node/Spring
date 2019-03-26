@@ -3,8 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="helloMessage" class="cn.kpy.ContextEvent.HelloMessage"></bean>
-    <bean id="cStart" class="cn.kpy.ContextEvent.CStartEventHandler"></bean>
-    <bean id="CStop" class="cn.kpy.ContextEvent.CStopEventHandler"></bean>
+    <bean id="helloMessage" class="cn.kpy.ContextEvent.Context.HelloMessage"></bean>
+    <bean id="cStart" class="cn.kpy.ContextEvent.Context.CStartEventHandler"></bean>
+    <bean id="CStop" class="cn.kpy.ContextEvent.Context.CStopEventHandler"></bean>
 
 </beans>
