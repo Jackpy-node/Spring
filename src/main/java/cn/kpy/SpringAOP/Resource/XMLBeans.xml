@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--execution(public * *(..))-->
+    <!--任何一个以“set”开始的方法的执行：-->
+    <!--execution(* set*(..))-->
+    <!--AccountService 接口的任意方法的执行：-->
+    <!--execution(* com.xyz.service.AccountService.*(..))-->
+    <!--定义在service包里的任意方法的执行：-->
+    <!--execution(* com.xyz.service.*.*(..))-->
+    <!--定义在service包和所有子包里的任意类的任意方法的执行：-->
+    <!--execution(* com.xyz.service..*.*(..))-->
+    <!--定义在pointcutexp包和所有子包里的JoinPointObjP2类的任意方法的执行：-->
+    <!--execution(* com.test.spring.aop.pointcutexp..JoinPointObjP2.*(..))")-->
+
+
+    <bean id="logging" class="cn.kpy.SpringAOP.AOPBaseOnXML.Logging"></bean>
+
+    <bean id="student" class="cn.kpy.SpringAOP.AOPBaseOnXML.Student">
+        <property name="name" value="John"></property>
+        <property name="age" value="25"></property>
+    </bean>
+
+    <aop:config>
+        <aop:aspect id="log" ref="logging">
+            <!--pointcut-id定义切入点id，后续五种通知通过pointcut-id关联切入点-->
+            <aop:pointcut id="selectAll" expression="execution(* cn.kpy.SpringAOP.AOPBaseOnXML.*.*(..))"></aop:pointcut>
+            <!--beforeAdvice在一个方法执行之前，执行通知-->
+            <aop:before pointcut-ref="selectAll" method="beforeAdvice"></aop:before>
+            <!--afterAdvice在一个方法执行之后，进行通知-->
+            <aop:after pointcut-ref="selectAll" method="afterAdvice"></aop:after>
+            <!--afterReturningAdvice在一个方法执行之后，只有在方法成功完成时，才能执行通知，注意返回值：returning="object"-->
+            <aop:after-returning pointcut-ref="selectAll" returning="object" method="afterReturningAdvice"></aop:after-returning>
+            <!--AfterThrowingAdvice在一个方法执行之后，只有在方法退出抛出异常时，才能执行通知，注意异常对象实例：throwing="ex"-->
+            <aop:after-throwing pointcut-ref="selectAll" method="AfterThrowingAdvice" throwing="ex"></aop:after-throwing>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

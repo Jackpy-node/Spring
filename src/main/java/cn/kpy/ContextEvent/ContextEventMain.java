@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  **/
 public class ContextEventMain {
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("Beans.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("XMLBeans.xml");
         HelloMessage helloMessage = (HelloMessage) applicationContext.getBean("helloMessage");
         ((ClassPathXmlApplicationContext) applicationContext).start();
         helloMessage.setMessage("Hello Context Event");
