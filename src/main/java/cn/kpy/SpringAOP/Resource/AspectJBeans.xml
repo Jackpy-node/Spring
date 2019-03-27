@@ -6,6 +6,7 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <!--注意：引入AOP AspectJ自动代理-->
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
     <bean id="student" class="cn.kpy.SpringAOP.AOPBaseAspectJ.Student">
