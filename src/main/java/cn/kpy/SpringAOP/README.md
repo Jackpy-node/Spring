@@ -123,3 +123,10 @@ public class Logging {
 
 </beans>
 ```
+## 三、Spring AOP面向切面
+### 1. 如果目标对象的实现类实现了接口，Spring AOP 将会采用 JDK 动态代理来生成 AOP 代理类
+### 2. 如果目标对象的实现类没有实现接口，Spring AOP 将会采用 CGLIB 来生成 AOP 代理类
+```java
+ApplicationContext applicationContext=new ClassPathXmlApplicationContext("DeclareTransaction.xml");
+StudentDAO studentDAO= (StudentDAO) applicationContext.getBean("studentMarksImpl");
+```
