@@ -3,8 +3,6 @@ package cn.kpy.SpringJDBC.DeclareTransaction;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.List;
-
 /**
  * @auther: kpy
  * @version: 1.0
