@@ -29,7 +29,7 @@ public class MainDeclare {
          *     </aop:config>
          **/
         /*ApplicationContext applicationContext = new ClassPathXmlApplicationContext("DeclareTransaction.xml");
-        StudentMarksImpl studentDAOImpl = (StudentMarksImpl) applicationContext.getBean("studentMarksImpl");*/
+        StudentMarksImpl studentMarksImpl = (StudentMarksImpl) applicationContext.getBean("studentMarksImpl");*/
 
 
         /** AOP 代理方式二（显式代理）：

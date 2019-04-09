@@ -1,5 +1,7 @@
 package cn.kpy.SpringJDBC.DeclareTransaction;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -14,6 +16,8 @@ import java.util.List;
  * @discription: 数据库接口实现类
  **/
 public class StudentMarksImpl implements StudentDAO{
+
+    private final static Logger logger= LogManager.getLogger(StudentMarksImpl.class);
 
     //用于通过xml配置文件加载数据库驱动
     private DataSource dataSource;
@@ -35,6 +39,7 @@ public class StudentMarksImpl implements StudentDAO{
             int sid = jdbcTemplateObject.queryForObject(SQL1, null, int.class);
             String SQL2 = "insert into marks (sid,marks,year) value (?, ?, ?)";
             jdbcTemplateObject.update(SQL2, sid, marks, year);
+            logger.debug("[%s%s%s]",sid,marks,year);
             System.out.println("Create Name：" + name + " Age：" + age);
             //To simulate the exception
             throw new RuntimeException("Simulate Error Condition !");

@@ -7,7 +7,7 @@
     <!--加载数据库驱动-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost:3306/kpy?useSSL=false"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/kpy?serverTimezone=UTC"></property>
         <property name="username" value="root"></property>
         <property name="password" value="199489"></property>
     </bean>
@@ -18,7 +18,7 @@
     </bean>
 
     <!--配置事务传播属性-->
-    <tx:advice id="txAdvice">
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!-- 事务传播属性、隔离级别、最优化为只读事务、事务超时 -->
             <tx:method name="create"/>
