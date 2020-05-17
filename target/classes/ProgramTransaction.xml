@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--j加载数据库驱动，连接数据库-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/kpy?useSSL=false"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="199489"></property>
+    </bean>
+
+    <!--引入事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="studentDAOImpl" class="cn.kpy.SpringJDBC.ProgramTransaction.StudentDAOImpl">
+        <!--数据库管理实现类中，依赖注入数据库驱动-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--数据库管理实现类中，依赖注入事务管理-->
+        <property name="platformTransactionManager" ref="transactionManager"></property>
+    </bean>
+
+</beans>

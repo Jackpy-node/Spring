@@ -39,6 +39,14 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
+    public Student query(String name) {
+        String SQL = "select * from table_student where name like ?";
+
+        Student student = jdbcTemplate.queryForObject(SQL, new Object[]{name}, new StudentMapper());
+        return student;
+    }
+
+    @Override
     public List<Student> queryAll() {
         String SQL = "select * from table_student";
         List<Student> studentList = jdbcTemplate.query(SQL, new StudentMapper());

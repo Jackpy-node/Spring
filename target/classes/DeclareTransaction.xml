@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--加载数据库驱动-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/kpy?serverTimezone=UTC"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="199489"></property>
+    </bean>
+
+    <!--申明数据库事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--配置事务传播属性-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- 事务传播属性、隔离级别、最优化为只读事务、事务超时 -->
+            <tx:method name="create"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--定义切入点，通过面向切面的方式进行事务管理，AOP expose-proxy属性为true暴露代理-->
+    <!--proxy-target-class="false" 默认为false,表示使用jdk的动态代理
+        proxy-target-class="true" 为true时，表示使用CGLib动态代理技术来实现增强处理-->
+
+    <!--切入点定义方式一：AOP expose-proxy属性为true暴露代理，proxy-target-class="true" 为true时，表示使用CGLib动态代理技术来实现增强处理-->
+    <!--<aop:config expose-proxy="true" proxy-target-class="true">
+        <aop:pointcut id="Create" expression="execution(* cn.kpy.SpringJDBC.DeclareTransaction.StudentMarksImpl.Create(..))"></aop:pointcut>
+        &lt;!&ndash; 定义织入点规则 &ndash;&gt;
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="Create"></aop:advisor>
+    </aop:config>-->
+
+    <!--切入点定义方式二：AOP expose-proxy属性默认为false不暴露代理，但需要进行目标类转换为父类接口-->
+    <aop:config>
+        <aop:pointcut id="Create" expression="execution(* cn.kpy.SpringJDBC.DeclareTransaction.StudentMarksImpl.Create(..))"></aop:pointcut>
+        <!-- 定义织入点规则 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="Create"></aop:advisor>
+    </aop:config>
+
+    <!--AOP 目标类-->
+    <bean id="studentMarksImpl" class="cn.kpy.SpringJDBC.DeclareTransaction.StudentMarksImpl">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+</beans>

@@ -17,6 +17,8 @@ public interface StudentDAO {
 
     public Student query(int id);
 
+    public Student query(String name);
+
     public List<Student> queryAll();
 
     public void delete(int id);

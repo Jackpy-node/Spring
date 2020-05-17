@@ -3,6 +3,7 @@ package cn.kpy.SpringJDBC.JDBC;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class MainJDBC {
     public static void main(String[] args) {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("JDBC.xml");
         StudentDAOImpl studentDAOImpl= (StudentDAOImpl) applicationContext.getBean("studentDaoImpl");
-        System.out.println("Insert Records Into table_student...");
+        /*System.out.println("Insert Records Into table_student...");
         studentDAOImpl.insert("John", 20);
         studentDAOImpl.insert("Mary", 25);
         studentDAOImpl.insert("James", 21);
@@ -28,6 +29,9 @@ public class MainJDBC {
         System.out.println("Query Student By id....");
         Student student=studentDAOImpl.query(1);
         System.out.println(student.getId()+"："+student.getName()+"---"+student.getAge());
-
+*/
+        System.out.println("Query Student By name...");
+        Student student1=studentDAOImpl.query("Ma");
+        System.out.println(student1.getId()+"："+student1.getName()+"---"+student1.getAge());
     }
 }
